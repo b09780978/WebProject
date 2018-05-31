@@ -1,0 +1,25 @@
+{
+  "name": "webproject",
+  "version": "1.0.0",
+  "description": "a project for web course.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b09780978/WebProject.git"
+  },
+  "keywords": [
+    "web"
+  ],
+  "author": "faker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/b09780978/WebProject/issues"
+  },
+  "homepage": "https://github.com/b09780978/WebProject#readme",
+  "dependencies": {
+    "tesseract.js": "^1.0.10"
+  }
+}
