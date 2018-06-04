@@ -6,7 +6,9 @@ const express = require("express");
 const cors = require("cors");
 const server = express();
 
-//server.use(cors({credentials: true, origin: true}));
+///////////////////////////////////
+//      設定server folder         //
+///////////////////////////////////
 server.use(cors());
 server.use('/static', express.static(__dirname+'/static'));
 server.use(express.static('file'));
@@ -25,6 +27,10 @@ server.get('/', (req, res) => {
     });
 });
 
+
+////////////////////////////////////
+//     執行server on 8000 port    //
+///////////////////////////////////
 server.listen(PORT, () => {
     console.log(`[+] Start server on ${PORT}`);
 });
