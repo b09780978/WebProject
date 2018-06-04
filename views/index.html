@@ -33,16 +33,25 @@
         </div>
 
         <script>
-            Tesseract.recognize('./static/file/1.jpg')
+            Tesseract.recognize('./static/file/1.jpg', {
+                    lang : 'eng',
+                })
                 .progress(function(message) {
-                    console.log(message);
+                    //console.log(message);
                     $('#progress').html('<h3><b>' + message.status + ':' + message.progress + '</b></h3>');
                 }).then(function(result) {
                     //console.log(result);
-                    $('#result').html('<h3><b>' + result.text + '</b></h3>');
+                    var block = result.blocks[0].bbox;
+                    var output = '圖片位置x0: ' + block.x0 + '<br>';
+                    output += '圖片位置x1: ' + block.x1 + '<br>';
+                    output += '圖片位置y0: ' + block.y0 + '<br>';
+                    output += '圖片位置y1: ' + block.y1 + '<br>';
+                    output += '<h3><b>' + result.text + '</b></h3>';
+                    $('#result').html('<p>' + output + '</p>');
                 }).catch(function(error) {
                     console.error(error);
                 });
+
         </script>
     </div>
 </body>
