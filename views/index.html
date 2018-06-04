@@ -32,6 +32,11 @@
 
         </div>
 
+		<form action="fileupload" method="post" enctype="multipart/form-data">
+        <input type="file" name="filetoupload">
+        <input type="submit" value="Upload">
+		</form>
+		
         <script>
             Tesseract.recognize('./static/file/1.jpg', {
                     lang : 'eng',
