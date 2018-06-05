@@ -65,6 +65,18 @@ server.post('/fileupload', (req, res) => {
                     output += '圖片位置y1: ' + block.y1 + '\n';
                     output += 'text: ' + result.text + '\n';
                     console.log(output);
+
+					
+					var fss = require('fs');
+					fss.writeFile("output.txt", output, function(err) {
+						if(err) {
+							console.log(err);
+						} else {
+							console.log("The file was saved!");
+						}
+					});
+					
+
                 }).catch(function (error) {
                     console.error(error);
                 });
