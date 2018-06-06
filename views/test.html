@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Test webcam</title>
+    <title>Web Final Project</title>
     <meta charset="utf-8">
 
     <!-- bootstrap 4.1.1 -->
@@ -21,62 +21,43 @@
 
 <body>
     <div class="container">
-       <h1>Webcam 畫面</h1>
-        <div class="container">
-            <video width="400px" height="600px" id="video" autoplay="">
-            
-        </video>
+        <h1>Image</h1>
+        <img src="./static/file/1.jpg" width="300px" height="400px" id="myImg">
+        <h2>progress</h2>
+        <div class="container" id="progress">
+
         </div>
-        <h1>擷取畫面</h1>
-        <div class="container">
-            <canvas width="400px" height="600px" id="canvas">
-            
-        </canvas>
-        </div>
-        
-        <h1>辨識結果</h1>
+        <h2>result</h2>
         <div class="container" id="result">
-            
+
         </div>
-        
+
+		<form action="fileupload" method="post" enctype="multipart/form-data">
+        <input type="file" name="filetoupload">
+        <input type="submit" value="Upload">
+		</form>
+		
         <script>
-            video = $('#video')[0];
-            canvas = $('#canvas')[0];
-            context = canvas.getContext('2d');
-            mediaStreamTrack = null;
-            ////////////////////////////////////////////////////////////
-            //                  開啟webcam                            //
-            ///////////////////////////////////////////////////////////
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({
-                    video: true,
-                    audio: false,
-                }).then(function(stream) {
-                    //console.log(stream);
-                    mediaStreamTrack = typeof stream.stop === 'function' ? stream : stream.getTracks()[1];
-                    video.src = (window.webkitURL || window.URL).createObjectURL(stream);
-                    video.play();
-                }).catch(function(error) {
-                    //console.log(error);
-                });
-            } else {
-                alert('無法開啟Webcam');
-            }
-            setInterval(function() {
-                context.drawImage(video, 0, 0, 400, 600);
-                Tesseract.recognize($('#canvas')[0], {
-                    lang: 'eng',
+            Tesseract.recognize('./static/file/1.jpg', {
+                    lang : 'eng',
+                })
+                .progress(function(message) {
+                    //console.log(message);
+                    $('#progress').html('<h3><b>' + message.status + ':' + message.progress + '</b></h3>');
                 }).then(function(result) {
                     //console.log(result);
-                    //console.log(result.text);
-                    $('#result').html('<p>'+result.text +'</p>')
+                    var block = result.blocks[0].bbox;
+                    var output = '圖片位置x0: ' + block.x0 + '<br>';
+                    output += '圖片位置x1: ' + block.x1 + '<br>';
+                    output += '圖片位置y0: ' + block.y0 + '<br>';
+                    output += '圖片位置y1: ' + block.y1 + '<br>';
+                    output += '<h3><b>' + result.text + '</b></h3>';
+                    $('#result').html('<p>' + output + '</p>');
                 }).catch(function(error) {
-                    //console.log(error);
+                    console.error(error);
                 });
-                console.log('截圖');
-            }, 10000);
-        </script>
 
+        </script>
     </div>
 </body>
 

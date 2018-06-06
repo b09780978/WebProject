@@ -30,7 +30,6 @@ const PORT = 8000;
 //          處理路由              //
 ///////////////////////////////////
 server.get('/', (req, res) => {
-
     res.sendFile('index.html', {
         root: path.join(__dirname, './views/')
     });
