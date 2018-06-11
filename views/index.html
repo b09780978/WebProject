@@ -27,17 +27,17 @@
 
 </head>
 
-<body>
+<body  style="background-color:#FFFFF2;" >
     <div class="container">
         <h1>Webcam 畫面</h1>
-        <div class="container">
-            <video width="400px" height="600px" id="video" autoplay="">
+        <div class="container"  style="background-color:#696969;">
+            <video width="1050px" height="600px" id="video" autoplay="">
             
         </video>
         </div>
         <h1>擷取畫面</h1>
         <div class="container">
-            <canvas width="400px" height="600px" id="canvas">
+            <canvas width="1050px" height="600px" id="canvas">
             
         </canvas>
         </div>
@@ -71,7 +71,7 @@
                 alert('無法開啟Webcam');
             }
             setInterval(function() {
-                context.drawImage(video, 0, 0, 400, 600);
+                context.drawImage(video, 100, 0, 850, 600);
                 Tesseract.recognize($('#canvas')[0], {
                     lang: 'eng',
                 }).then(function(result) {
