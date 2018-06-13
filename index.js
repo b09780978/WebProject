@@ -35,12 +35,6 @@ server.get('/', (req, res) => {
     });
 });
 
-server.get('/test', (req, res) => {
-    res.sendFile('test.html', {
-        root : path.join(__dirname, './views/')
-    });
-});
-
 server.post('/fileupload', (req, res) => {
     if (req.url == '/uploadform') {
         res.writeHead(200);
